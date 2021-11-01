@@ -6,7 +6,7 @@ use rlp::{Decodable, DecoderError, Encodable, Rlp, RlpStream};
 use sha3::{Digest, Keccak256};
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
-#[cfg_attr(feature = "with-codec", derive(codec::Encode, codec::Decode))]
+#[cfg_attr(feature = "with-codec", derive(codec::Encode, codec::Decode, scale_info::TypeInfo))]
 #[cfg_attr(feature = "with-serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum TransactionAction {
 	Call(H160),
@@ -39,7 +39,7 @@ impl Decodable for TransactionAction {
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
-#[cfg_attr(feature = "with-codec", derive(codec::Encode, codec::Decode))]
+#[cfg_attr(feature = "with-codec", derive(codec::Encode, codec::Decode, scale_info::TypeInfo))]
 #[cfg_attr(feature = "with-serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct TransactionRecoveryId(pub u64);
 
@@ -70,6 +70,7 @@ impl TransactionRecoveryId {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
+#[cfg_attr(feature = "with-codec", derive(scale_info::TypeInfo))]
 #[cfg_attr(feature = "with-serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct TransactionSignature {
 	v: TransactionRecoveryId,
@@ -161,7 +162,7 @@ impl codec::Decode for TransactionSignature {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
-#[cfg_attr(feature = "with-codec", derive(codec::Encode, codec::Decode))]
+#[cfg_attr(feature = "with-codec", derive(codec::Encode, codec::Decode, scale_info::TypeInfo))]
 #[cfg_attr(feature = "with-serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct AccessListItem {
 	pub address: Address,
@@ -188,7 +189,7 @@ impl Decodable for AccessListItem {
 pub type AccessList = Vec<AccessListItem>;
 
 #[derive(Clone, Debug, PartialEq, Eq)]
-#[cfg_attr(feature = "with-codec", derive(codec::Encode, codec::Decode))]
+#[cfg_attr(feature = "with-codec", derive(codec::Encode, codec::Decode, scale_info::TypeInfo))]
 pub struct LegacyTransactionMessage {
 	pub nonce: U256,
 	pub gas_price: U256,
@@ -342,7 +343,7 @@ impl EIP1559TransactionMessage {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
-#[cfg_attr(feature = "with-codec", derive(codec::Encode, codec::Decode))]
+#[cfg_attr(feature = "with-codec", derive(codec::Encode, codec::Decode, scale_info::TypeInfo))]
 #[cfg_attr(feature = "with-serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct LegacyTransaction {
 	pub nonce: U256,
@@ -402,7 +403,7 @@ impl Decodable for LegacyTransaction {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
-#[cfg_attr(feature = "with-codec", derive(codec::Encode, codec::Decode))]
+#[cfg_attr(feature = "with-codec", derive(codec::Encode, codec::Decode, scale_info::TypeInfo))]
 #[cfg_attr(feature = "with-serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct EIP2930Transaction {
 	pub chain_id: u64,
@@ -466,7 +467,7 @@ impl Decodable for EIP2930Transaction {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
-#[cfg_attr(feature = "with-codec", derive(codec::Encode, codec::Decode))]
+#[cfg_attr(feature = "with-codec", derive(codec::Encode, codec::Decode, scale_info::TypeInfo))]
 #[cfg_attr(feature = "with-serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct EIP1559Transaction {
 	pub chain_id: u64,
@@ -574,7 +575,7 @@ impl Decodable for TransactionV1 {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
-#[cfg_attr(feature = "with-codec", derive(codec::Encode, codec::Decode))]
+#[cfg_attr(feature = "with-codec", derive(codec::Encode, codec::Decode, scale_info::TypeInfo))]
 #[cfg_attr(feature = "with-serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum TransactionV2 {
 	/// Legacy transaction type
